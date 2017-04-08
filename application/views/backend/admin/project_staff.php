@@ -1,6 +1,4 @@
 <?php
-//dem xem co moc thanh toan khong
-$is_exist_milestone = $this->db->query("SELECT * FROM project_milestone WHERE project_code = '$project_code'")->num_rows();
 //lay du lieu cua project
 $current_project = $this->db->get_where('project', array(
             'project_code' => $project_code
@@ -13,7 +11,7 @@ foreach ($current_project as $row):
 
             <div class="panel-heading">
                 <div class="panel-title">
-                    <?php echo get_phrase('edit_project'); ?>
+                    <?php echo 'Chỉ định nhân viên cho dự án'; ?>
                 </div>
 
             </div>
@@ -21,181 +19,34 @@ foreach ($current_project as $row):
             <div class="panel-body">
 
                 <!-- project edit form -->
-                <?php echo form_open(base_url() . 'index.php?admin/project/edit/' . $row['project_code'], array('class' => 'form-horizontal form-groups-bordered', 'enctype' => 'multipart/form-data')); ?>
+                <?php echo form_open(base_url() . 'index.php?admin/project/edit_asign_staff/' . $row['project_code'], array('class' => 'form-horizontal form-groups-bordered', 'enctype' => 'multipart/form-data')); ?>
 
                 <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('project_title'); ?></label>
+                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('assign_staff'); ?></label>
 
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="title" id="title" data-validate="required" 
-                               data-message-required="<?php echo get_phrase('value_required'); ?>" value="<?php echo $row['title']; ?>">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('description'); ?></label>
-
-                    <div class="col-sm-8">
-                        <textarea class="form-control wysihtml5" rows="10" name="description" id="post_content" 
-                                  data-stylesheet-url="assets/css/wysihtml5-color.css"><?php echo $row['description']; ?></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('status'); ?></label>
-                    <div class="col-sm-5">
-                        <select class="selectboxit" name="project_status">
-                            <option><?php echo get_phrase('select_project_status'); ?></option>
-                            <!-- qhxh code -->
-                            <option value="2" <?php if ($row['project_status'] == 2) echo 'selected'; ?>>
-                                <?php echo 'Đang bàn giao'; ?>
-                            </option>
-                            <option value="3" <?php if ($row['project_status'] == 3) echo 'selected'; ?>>
-                                <?php echo 'Dự án mới'; ?>
-                            </option>
-                            <!-- end qhxh code-->
-                             <option value="1" <?php if ($row['project_status'] == 1) echo 'selected'; ?>>
-                                <?php echo get_phrase('running'); ?>
-                            </option>
-                            <option value="4" <?php if ($row['project_status'] == 4) echo 'selected'; ?>>
-                                <?php echo get_phrase('cancle'); ?>
-                            </option>
-                            <option value="0" <?php if ($row['project_status'] == 0) echo 'selected'; ?>>
-                                <?php echo get_phrase('archived'); ?>
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('budget'); ?></label>
-
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-bookmarks"></i></span>
-                            <input type="text" class="form-control" name="budget"  value="<?php echo $row['budget']; ?>" >
-                        </div>
-                    </div>
-                </div>
-                <!-- qhxh code -->
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('discount').' (%)'; ?></label>
-
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-bookmarks"></i></span>
-                            <input type="text" class="form-control" name="discount"  value="<?php echo $row['discount']; ?>" >
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo 'Thanh toán: '; ?></label>
-
-                    <div class="col-sm-5">
-                        <span class="input-group-addon info">
-                        
-                        <?php if ( $is_exist_milestone > 0 )  { ?>
-                        <i class="entypo-cc text-info">
-                         Có <?php echo $is_exist_milestone; ?> mốc thanh toán, Xem trong mục thanh toán </i></span>
-                        </i>
-                        <?php 
-                            } 
-                            else 
-                                echo '<i class="entypo-cc text-warning"> Chưa có mốc thanh toán, thêm trong mục thanh toán </i>';
-                        ?>
-                       
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- end qhxh code -->
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('start_time'); ?></label>
-
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" class="form-control datepicker" name="timestamp_start"  value="<?php echo $row['timestamp_start']; ?>" >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('ending_time'); ?></label>
-
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" class="form-control datepicker" name="timestamp_end"  value="<?php echo $row['timestamp_end']; ?>" >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('demo_url'); ?></label>
-
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-globe"></i></span>
-                            <input type="text" class="form-control" name="demo_url"  value="<?php echo $row['demo_url']; ?>" >
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('progress_status'); ?></label>
-
-                    <div class="col-sm-5" style="padding-top:9px;">
-                        <div class="slider2 slider slider-blue disable" data-prefix="" data-postfix="%" 
-                             data-min="-1" data-max="101" data-value="<?php echo $row['progress_status']; ?>"></div>
-                        <input type="hidden" name="progress_status" id="progress_status" value="<?php echo $row['progress_status']; ?>" >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('client'); ?></label>
-
-                    <div class="col-sm-5">
-                        <select name="client_id" class="select2">
-                            <option value=""><?php echo get_phrase('select_a_client'); ?></option>
+                        <select multiple="multiple" name="staffs[]" class="form-control multi-select" >
                             <?php
-                            $clients = $this->db->get('client')->result_array();
-                            foreach ($clients as $row2):
+                            $staffs = $this->db->get('staff')->result_array();
+                            foreach ($staffs as $row2):
                                 ?>
-                                <option value="<?php echo $row2['client_id']; ?>"
-                                        <?php if ($row['client_id'] == $row2['client_id']) echo 'selected'; ?>>
-                                    <?php echo $row2['name']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    
-                    <?php echo get_phrase('update_project'); ?></button>
-                </div>
-
-                <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('company'); ?></label>
-                    <div class="col-sm-5">
-                        <select name="company_id" class="form-control selectboxit">
-                            <option><?php echo get_phrase('select_company'); ?></option>
-                            <?php
-                            $companies = $this->db->get('company')->result_array();
-                            foreach ($companies as $row2):
-                                ?>
-                                <option value="<?php echo $row2['company_id']; ?>"
+                                <option value="<?php echo $row2['staff_id']; ?>"
                                 <?php
-                                if ($row['company_id'] == $row2['company_id'])
-                                    echo 'selected';
-                                ?>>
-                                <?php echo $row2['name']; ?></option>
+                                        if (in_array($row2['staff_id'], explode(',', $row['staffs'])))
+                                            echo 'selected';
+                                        ?>>
+        <?php echo $row2['name']; ?></option>
     <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
+                
+               
 
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-8">
                         <button type="submit" class="btn btn-info" id="submit-button">
-    <?php echo get_phrase('update_project'); ?></button>
+    <?php echo 'Cập nhật'; ?></button>
                         <span id="preloader-form"></span>
                     </div>
                 </div>

@@ -57,7 +57,7 @@
                     </tr>
                     <tr> 
                         <td> Ngân sách </td>
-                        <td> <?php echo $row['budget']; ?></td>
+                        <td> <?php echo money_format('%n', $row['budget']); ?></td>
                     </tr>
                     <tr> 
                         <td> Chiết khấu </td>

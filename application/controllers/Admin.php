@@ -304,6 +304,12 @@ class Admin extends CI_Controller {
             $page_data['project_code'] = $param2;
         }
 
+        //qhxh code add tab assign nhan vien_____________/
+        else if ($param1 == 'asignstaff') {
+            $page_data['room_page'] = 'project_staff';
+            $page_data['project_code'] = $param2;
+        }
+        //*****************end qhxh code*******************/
         // edit project 
         else if ($param1 == 'edit') {
             $page_data['room_page'] = 'project_edit';
@@ -574,8 +580,6 @@ class Admin extends CI_Controller {
         if ($param1 == 'edit') {
             $project_code = $param2;
             $this->crud_model->update_project($param2);
-            //qhxh code: update tien do nhan vien 
-            $this->crud_model->update_staff_progress($param2);
             //Lay thong tin du an vua khoi tao
             $current_project = $this->crud_model->get_one_project($project_code);
             /************gui thong bao den nhan vien trong project*********************************/
@@ -593,6 +597,14 @@ class Admin extends CI_Controller {
 
             $this->session->set_flashdata('flash_message' , get_phrase('project_updated'));
             redirect(base_url() . 'index.php?admin/projectroom/edit/' . $param2 , 'refresh');
+        }
+
+        if ($param1 == 'edit_asign_staff') {
+            $this->crud_model->update_project_Staff($param2);
+            //cap nhat lai tien do
+            $this->crud_model->update_staff_progress($param2);
+            $this->session->set_flashdata('flash_message' ,  'Đã chỉ định nhân viên' );
+            redirect(base_url() . 'index.php?admin/projectroom/overview/' . $param2 , 'refresh');
         }
 
         if ($param1 == 'delete')
@@ -1258,7 +1270,7 @@ class Admin extends CI_Controller {
     }
 
     /*******************QHXH code: them quan ly category cho du an ***********************/
-    public function category() {
+    function category() {
         $this->load->model('qh_category_model');
         //data
         $page_data['all_categories'] = $this->qh_category_model->get_all_categories();
@@ -1270,36 +1282,125 @@ class Admin extends CI_Controller {
         $this->load->view('backend/index', $page_data);
     }
 
-    public function category_action($action = '', $cat_id='') {
+    function cat_create() {
+        $this->load->model('qh_category_model');
+        $this->load->library('form_validation');
+        //config validate
+            $this->form_validation->set_rules('cat-name', 'Tên gói', 'required',
+                array('required' => 'Tên gói không được trống')
+            );
+            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|numeric',
+                array('required' => 'Ngân sách không được trống', 'numeric' => 'Ngân sách phải là tiền tệ')
+            );
+            $this->form_validation->set_rules('cat-time', 'Thời gian là số ngày', 'required|integer',
+                array('required' => 'Thời gian không được trống', 'integer' => 'Số ngày phải là số nguyên')
+            );
+            $this->form_validation->set_error_delimiters('<div style="margin:5px 0" class="text-danger">', '</div>');
+        //nhan du lieu
+        if ( isset( $_POST['cat-create-submit'] ) ) {
+            
+            //validate form
+            if ( $this->form_validation->run() == FALSE ) {
+                //setup page
+                $page_data['page_name'] = 'category_form';
+                $page_data['page_title'] = 'Thêm gói dự án';
+                $this->load->view('backend/index', $page_data);
+            }  else {
+                //lay du lieu
+                $cat_data['name'] = $this->input->post('cat-name');
+                $cat_data['description'] = trim( $this->input->post('cat-desc') );
+                $cat_data['cat_ngansach'] = $this->input->post('cat-ngansach');
+                $cat_data['cat_time'] = $this->input->post('cat-time');
 
-    } 
+                $this->qh_category_model->add_category($cat_data);
 
-    public function cat_edit($cat_id) {
+                $this->session->set_flashdata('flash_message' , get_phrase('data_approved_successfuly'));
+                redirect('admin/category');
+            }
 
+        }  else {
+            //setup page
+            $page_data['page_name'] = 'category_form';
+            $page_data['page_title'] = 'Thêm gói dự án';
+            $this->load->view('backend/index', $page_data);
+        }
+        
+
+        
+    }
+    function cat_edit($cat_id) {
+        $this->load->model('qh_category_model');
+        $this->load->library('form_validation');
+        $cat = $this->qh_category_model->get_cat_by_id($cat_id);
+
+        //config validate
+            $this->form_validation->set_rules('cat-name', 'Tên gói', 'required',
+                array('required' => 'Tên gói không được trống')
+            );
+            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|numeric',
+                array('required' => 'Ngân sách không được trống', 'numeric' => 'Ngân sách phải là tiền tệ')
+            );
+            $this->form_validation->set_rules('cat-time', 'Thời gian là số ngày', 'required|integer',
+                array('required' => 'Thời gian không được trống', 'integer' => 'Số ngày phải là số nguyên')
+            );
+            $this->form_validation->set_error_delimiters('<div style="margin:5px 0" class="text-danger">', '</div>');
+        //nhan du lieu
+        if ( isset( $_POST['cat-edit-submit'] ) ) {
+            
+            //validate form
+            if ( $this->form_validation->run() == FALSE ) {
+                //setup page
+                $page_data['cat'] = $cat;
+                $page_data['page_name'] = 'category_edit';
+                $page_data['page_title'] = 'Sửa gói dự án';
+                $this->load->view('backend/index', $page_data);
+            }  else {
+                //lay du lieu
+                $cat_data['name'] = $this->input->post('cat-name');
+                $cat_data['description'] = trim( $this->input->post('cat-desc') );
+                $cat_data['cat_ngansach'] = $this->input->post('cat-ngansach');
+                $cat_data['cat_time'] = $this->input->post('cat-time');
+
+                $this->qh_category_model->update_category($cat_id, $cat_data);
+
+                $this->session->set_flashdata('flash_message' , get_phrase('data_approved_successfuly'));
+                redirect('admin/category');
+            }
+
+        } 
+
+
+        if ( ! empty( $cat_id ) ) {
+            /**************************************/
+            $page_data['page_name'] = 'category_edit';
+            $page_data['page_title'] = 'Sửa gói dự án';
+            $page_data['cat'] = $cat;
+            $this->load->view('backend/index', $page_data);
+
+            /**************************************/
+        } else {
+            redirect('admin/category');
+        }
+        
     }
 
-    public function cat_add() {
-        $cat['name']            = $this->input->post['cat_name'];
-        $cat['description']     = $this->input->post['cat_description'];
-        $cat['cat_ngansach']    = $this->input->post['cat_budget'];
-        $cat['cat_time']        = $this->input->post['cat_time'];
-        $this->qh_category_model->add_category($cat);
-    }
-    
-    public function cat_delete($cat_id) {
 
+    function cat_delete($cat_id) {
+        $this->load->model('qh_category_model');
+        $this->qh_category_model->delete_category($cat_id);
+        redirect('admin/category');
     }
 
     //su ly ajax thay doi select
-    public function show_cat_ajax() {
+    function show_cat_ajax() {
         $cat_id = $this->input->post('cat_id');
         $cat = $this->qh_category_model->get_cat_by_id($cat_id);
         echo json_encode($cat);
         die;
     }
 
-    public function cat_reload_list() {
-        $this->load->view('backend/admin/category_list');
+    function cat_reload_list() {
+        redirect('admin/category');
     }
 /**************************qhxh code : show all notification *************/
 public function notification()

@@ -143,7 +143,8 @@
         <li class="<?php if ($page_name == 'project_add' ||
                                 $page_name == 'project' ||
                                     $page_name == 'project_room' ||
-                                        $page_name == 'project_quote' || $page_name == 'project_quote_view')
+                                        $page_name == 'project_quote' || $page_name == 'project_quote_view'
+                                        || $page_name == 'category_list')
                                             echo 'opened active has-sub';?>">
             <a href="#">
                 <i class="entypo-paper-plane"></i>
@@ -155,7 +156,7 @@
                     <a href="<?php echo base_url(); ?>index.php?admin/category">
                         <i class="entypo-dot"></i>
                         <span><?php echo get_phrase('category_manager'); ?></span>
-                    </a>
+                    </a> 
                 </li>
                 <!-- end qhxh code -->
                 <li class="<?php if ($page_name == 'project') echo 'active';?>">

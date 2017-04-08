@@ -40,7 +40,7 @@
 		           		<?php echo date('jS F Y' , $row['timestamp']);?>
 		            </td>
 		            <td>
-		            	<?php echo $row['amount'];?>
+		            	<?php echo  money_format('%n', $row['amount']);?>
 		            </td>
 					<td align="center">
 		            	<button class="btn btn-default btn-sm"

@@ -28,16 +28,19 @@ class QH_category_model extends CI_Model {
     	$this->db->insert($this->table, $cat_data);
     }
 
-    function delete_category() {
-
+    function delete_category($id) {
+        $this->db->where('project_category_id', $id);
+        $this->db->delete($this->table);
     }
 
-    function update_category() {
-
+    function update_category($id,$cat_data = array()) {
+        $this->db->where('project_category_id', $id);
+        $this->db->update($this->table,$cat_data);
     }
 
     function get_cat_by_id($id) {
-        return $this->db->get("SELECT * FROM $this->table WHERE project_category = '$id'")->row();
+        $this->db->where('project_category_id', $id);
+        return $this->db->get($this->table)->row();
     }
 
 /**********************************************************************/

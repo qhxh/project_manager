@@ -79,13 +79,12 @@
     ?>
     <div class="alert alert-default">
         <strong style="color: #818da1;">
-            <?php echo get_phrase('total_amount');?> : <?php echo $total_amount;?> &nbsp; &nbsp; &nbsp;
-            <?php echo get_phrase('paid_amount');?> : <?php echo $paid_amount;?> &nbsp; &nbsp; &nbsp;
-            <?php echo get_phrase('due');?> : <?php echo ($total_amount - $paid_amount);?> 
+            <?php echo get_phrase('total_amount');?> : <?php echo money_format('%n', $total_amount) ;?> &nbsp; &nbsp; &nbsp;
+            <?php echo get_phrase('paid_amount');?> : <?php echo money_format('%n', $paid_amount) ;?> &nbsp; &nbsp; &nbsp;
+            <?php echo get_phrase('due');?> : <?php if ($total_amount < $paid_amount) echo '0d'; else echo money_format('%n', $total_amount - $paid_amount);?> 
         </strong>
     </div>
     
-
     <!-- table for project milestones -->
     <div class="panel panel-primary" data-collapsed="0">
 

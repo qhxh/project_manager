@@ -34,13 +34,14 @@
 
                     <div class="col-sm-5">
                         <select name="staff_id" class="select2">
-                            <option><?php echo get_phrase('select_staff'); ?></option>
                             <?php
                             $staffs = $this->db->get('staff')->result_array();
                             foreach ($staffs as $row):
+                                if ( $row['staff_id'] == $this->session->userdata('login_user_id') ) : 
                                 ?>
                                 <option value="<?php echo $row['staff_id']; ?>">
                                     <?php echo $row['name']; ?></option>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </div>

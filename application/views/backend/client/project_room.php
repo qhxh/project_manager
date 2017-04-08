@@ -50,6 +50,7 @@
 			<?php echo get_phrase('bugs/Issues');?>
 			<i class="entypo-feather"></i>
 		</a>
+		<!-- 
 		<a style="text-align: left;" href="<?php echo base_url();?>index.php?client/projectroom/timesheet/<?php echo $project_code;?>" 
 			class="<?php if ($room_page == 'project_timesheet') 
 								echo 'btn btn-primary';
@@ -58,7 +59,7 @@
 			<?php echo get_phrase('timesheet');?>
 			<i class="entypo-clock"></i>
 		</a>
-
+		!-->
 		<a style="text-align: left;" href="<?php echo base_url();?>index.php?client/projectroom/payment/<?php echo $project_code;?>" 
 			class="<?php if ($room_page == 'project_payment') 
 								echo 'btn btn-primary';

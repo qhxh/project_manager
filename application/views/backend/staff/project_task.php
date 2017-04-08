@@ -39,7 +39,7 @@
         
         <?php
             $this->db->order_by('project_task_id' , 'desc'); 
-            $project_tasks  =   $this->db->get_where('project_task' , array('project_id' => $row['project_id']))->result_array();
+            $project_tasks  =   $this->db->get_where('project_task' , array('project_id' => $row['project_id'],'staff_id' => $this->session->userdata('login_user_id') ))->result_array();
             foreach ($project_tasks as $row2):
         ?>
         <div class="panel panel-default">

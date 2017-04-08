@@ -29,7 +29,7 @@
             	<td></td>
 				<td><?php echo date("d M, Y" , $row['timestamp']);?></td>
 				<td><?php echo $this->db->get_where('project',array('project_code' => $row['project_code']))->row()->title;?></td>
-				<td><?php echo $row['amount'];?></td>
+				<td><?php echo money_format('%n', $row['amount']);?></td>
 				<td><?php echo $row['payment_method'];?></td>
 			</tr>
 

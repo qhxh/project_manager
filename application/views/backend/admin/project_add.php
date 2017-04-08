@@ -1,10 +1,3 @@
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('a#add-company-button').click(function(){
-        window.open(this.href);
-        return false;
-      });
-});
 </script>
 <!-- ajax change category -->
 <?php
@@ -207,7 +200,7 @@
                    <button class="btn btn-default pull-left" data-izimodal-open="add-company-modal" data-izimodal-transitionin="fadeInDown">
                       <i class="entypo-plus-circled"></i>
                         <?php echo get_phrase('add');?>
-            
+                   
                      </button>
                      <div id="add-company-modal">
                            <button class="btn btn-danger pull-right" data-izimodal-close="" style="margin:5px;">Đóng</button>
@@ -260,6 +253,7 @@
 <!---qhxh code: ajax load select -->
 <script type="text/javascript">
             $(document).ready(function() {
+
                 $("#add-client-modal").iziModal({
                     title: "THÊM KHÁCH HÀNG",
                     closeButton: true,
@@ -268,7 +262,7 @@
                     iframe: true,
                     iframeURL: "<?php echo base_url();?>index.php?modal/popup/client_add/",
                     onClosed: function(){
-                        event.preventDefault();
+                       
                         $("#client_id").empty();
                         $.get("<?php echo base_url() ?>" + "index.php?admin/ajax_get_client", function (data,status){
                             var list_client = JSON.parse(data);
@@ -290,7 +284,7 @@
                 
                     $(document).on('click', '.trigger', function (event) {
                     event.preventDefault();
-                    $('#add-client-modal').iziModal('open'); // Use "this" to get URL href or option 'iframeURL'
+                    $('#add-client-modal').iziModal('open',this); // Use "this" to get URL href or option 'iframeURL'
                 });
                 /**************************************** add company modal ************************/
                $("#add-company-modal").iziModal({
@@ -301,7 +295,7 @@
                     iframe: true,
                     iframeURL: "<?php echo base_url();?>index.php?modal/popup/company_add/",
                     onClosed: function(){
-                            event.preventDefault();
+                        
                             $("#company_select").empty();
                 
                             $.get("<?php echo base_url() ?>" + "index.php?admin/ajax_get_company", function (data,status){
@@ -328,7 +322,7 @@
                 
                     $(document).on('click', '.trigger', function (event) {
                     event.preventDefault();
-                    $('#add-company-modal').iziModal('open'); // Use "this" to get URL href or option 'iframeURL'
+                    $('#add-company-modal').iziModal('open',this); // Use "this" to get URL href or option 'iframeURL'
                 });
                
             });

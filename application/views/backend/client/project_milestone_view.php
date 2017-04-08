@@ -84,7 +84,7 @@ foreach ($milestone_details as $row):
                         <?php
                         $system_currency_id = $this->db->get_where('settings' , array('type' => 'system_currency_id'))->row()->description;
                         $currency = $this->db->get_where('currency' , array('currency_id' => $system_currency_id))->row()->currency_symbol;
-                        echo $currency . $row['amount'];
+                        echo money_format( '%n' , $row['amount']) ;
                         ?>
                     </td>
                 </tr>
@@ -97,7 +97,7 @@ foreach ($milestone_details as $row):
             </tr>
             <tr>
                 <td align="right" width="80%"><h4><?php echo get_phrase('grand_total'); ?> :</h4></td>
-                <td align="right"><h4><?php echo $currency . $row['amount']; ?> </h4></td>
+                <td align="right"><h4><?php echo money_format( '%n' , $row['amount']) ; ?> </h4></td>
             </tr>
         </table>
 

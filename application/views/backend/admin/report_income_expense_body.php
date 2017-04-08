@@ -42,7 +42,7 @@
 					?>
 				</td>
 				<td><?php echo $row['type'];?></td>
-				<td><?php echo $row['amount'];?></td>
+				<td><?php echo money_format('%n', $row['amount']);?></td>
 			</tr>
 
 		<?php endforeach;?>

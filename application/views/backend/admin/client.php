@@ -1,11 +1,8 @@
-<a href="javascript:;" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/client_add/');" 
+<a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/client_add/');" 
     class="btn btn-primary pull-right">
         <i class="entypo-user-add"></i>
         <?php echo get_phrase('add_new_client');?>
-    </a>
-
-
-
+</a>
 <div class="row">
 
 	<div class="col-md-12">

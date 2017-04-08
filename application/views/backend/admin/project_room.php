@@ -94,6 +94,14 @@
 			<i class="entypo-tag"></i>
 	    </a>
 
+		<a style="text-align: left;" href="<?php echo base_url();?>index.php?admin/projectroom/asignstaff/<?php echo $project_code;?>" 
+			class="<?php if ($room_page == 'project_staff') 
+								echo 'btn btn-primary';
+							else 
+								echo 'btn btn-default';?> btn-block btn-icon icon-left">
+			<?php echo 'chỉ định nhân viên';?>
+			<i class="entypo-users"></i>
+		</a>
 
         <a style="text-align: left;" href="<?php echo base_url();?>index.php?admin/projectroom/edit/<?php echo $project_code;?>" 
 			class="<?php if ($room_page == 'project_edit') 

@@ -337,13 +337,23 @@ class Crud_model extends CI_Model {
         $data['progress_status'] = $this->input->post('progress_status');
         $data['client_id'] = $this->input->post('client_id');
         $data['company_id'] = $this->input->post('company_id');
-        $data['staffs'] = '';
-        if ($this->input->post('staffs') != "")
-            foreach ($this->input->post('staffs') as $row)
-                $data['staffs'] .= $row . ',';
+        //chuyen update staff rieng
 
         $this->db->where('project_code', $project_code);
         $this->db->update('project', $data);
+    }
+
+    /*************************** QHXH code update project staff **********/
+    function update_project_staff($project_code) {
+        $data['staffs'] = '';
+        if ($this->input->post('staffs') != "") {
+            foreach ($this->input->post('staffs') as $row)
+                $data['staffs'] .= $row . ',';
+            $this->db->where('project_code', $project_code);
+            $this->db->update('project', $data);
+        } else 
+            return;
+
     }
 
     function delete_project($project_code) {

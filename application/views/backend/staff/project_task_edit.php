@@ -36,17 +36,15 @@
                     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('assign_staff'); ?></label>
 
                     <div class="col-sm-5">
-                        <select name="staff_id" class="select2">
-                            <option><?php echo get_phrase('select_staff'); ?></option>
+                        <select name="staff_id" class="select" disabled>
                             <?php
                             $staffs = $this->db->get('staff')->result_array();
-                            foreach ($staffs as $row2):
+                            foreach ($staffs as $row):
+                                if ( $row['staff_id'] == $this->session->userdata('login_user_id') ) : 
                                 ?>
-                                <option value="<?php echo $row2['staff_id']; ?>"
-                                    <?php if ($row['staff_id'] == $row2['staff_id'])
-                                        echo 'selected';?>>
-                                    <?php echo $row2['name']; ?>
-                                </option>
+                                <option value="<?php echo $row['staff_id']; ?>">
+                                    <?php echo $row['name']; ?></option>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
                     </div>

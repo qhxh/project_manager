@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <div class="panel-title" >
                     <i class="entypo-plus-circled"></i>
-                    <?php echo 'Sửa gói dự án'; ?>
+                    <?php echo 'Thêm gói dự án'; ?>
                 </div>
             </div>
             <div class="panel-body">
@@ -14,8 +14,8 @@
                         <label for="name" class="col-sm-4 control-label"><?php echo get_phrase('name'); ?></label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="entypo-user"></i></span>
-                                <input type="text" class="form-control" name="cat-name"  value="<?php if ($cat->name) echo $cat->name; ?>" placeholder="Tên gói">
+                                <span class="input-group-addon"><i class="entypo-comment"></i></span>
+                                <input type="text" class="form-control" name="cat-name"  value="" placeholder="Tên gói">
 
                             </div>
                             <?php echo form_error('cat-name'); ?>
@@ -28,10 +28,8 @@
                         
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="entypo-user"></i></span>
-                                <textarea class="form-control" placeholder="Mô tả gói" name="cat-desc">
-                                    <?php if ( $cat->description ) echo $cat->description; ?>
-                                </textarea>
+                                <span class="input-group-addon"><i class="entypo-keyboard"></i></span>
+                                <textarea class="form-control" placeholder="Mô tả gói" name="cat-desc"></textarea>
                             </div>
                         </div>
                     </div>
@@ -41,8 +39,8 @@
                         
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="entypo-user"></i></span>
-                                <input type="text" class="form-control" name="cat-ngansach"  value="<?php if ($cat->cat_ngansach) echo $cat->cat_ngansach; ?>" placeholder="VND">
+                                <span class="input-group-addon"><i class="entypo-cc-nc"></i></span>
+                                <input type="text" class="form-control" name="cat-ngansach"  value="" placeholder="VND">
                             </div>
                             <?php echo form_error('cat-ngansach'); ?>
                         </div>
@@ -53,8 +51,8 @@
                         
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="entypo-user"></i></span>
-                                <input type="text" class="form-control" name="cat-time"  value="<?php if ($cat->cat_time) echo $cat->cat_time; ?>" placeholder="Ngày">
+                                <span class="input-group-addon"><i class="entypo-clock"></i></span>
+                                <input type="text" class="form-control" name="cat-time"  value="" placeholder="Ngày">
                             </div>
                             <?php echo form_error('cat-time'); ?>
                         </div>
@@ -62,7 +60,7 @@
                     
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-7">
-                            <button type="submit" class="btn btn-info" name ="cat-edit-submit"><?php echo 'Sửa'; ?></button>
+                            <button type="submit" class="btn btn-info" name ="cat-create-submit"><?php echo 'Thêm/Sửa'; ?></button>
                         </div>
                     </div>
                 </form>

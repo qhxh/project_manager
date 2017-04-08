@@ -1,3 +1,8 @@
+    <a href="<?php echo base_url(); ?>index.php?admin/cat_create" 
+    class="btn btn-primary pull-right" style="margin-bottom: 10px">
+        <i class="entypo-user-add"></i>
+        <?php echo 'Thêm gói mới';?>
+</a>
 <table class="table table-bordered table-striped datatable" id="table_export">
     <thead>
         <tr>
@@ -8,7 +13,6 @@
             <th><div><?php echo get_phrase('budget'); ?></div></th>
             <th><div><?php echo get_phrase('time'); ?> (<?php echo get_phrase('days'); ?>)</div></th>
             <th><div><?php echo get_phrase('option'); ?> </div></th>
-          
 		</tr>
 	</thead>
 
@@ -17,9 +21,9 @@
 			foreach ($all_categories as $cat) {
 		?>
 			<tr>
-				<td> <?php echo $num_cats + 3; ?></td>
+				<td> </td>
 				<td> <?php echo $cat->name; ?> </td>
-				<td> <?php echo $cat->cat_ngansach; ?> </td>
+				<td> <?php echo money_format('%n', $cat->cat_ngansach); ?> </td>
 				<td> <?php echo $cat->cat_time; ?> </td>
 				<td>
 				<div class="btn-group">
@@ -30,7 +34,7 @@
 
                         <!-- EDITING LINK -->
                         <li>
-                            <a onclick="showAjaxModal('<?php echo base_url(); ?>index.php?modal/popup/category_action/edit/<?php echo $cat->project_category_id; ?>');">
+                            <a href="<?php echo base_url(); ?>index.php?admin/cat_edit/<?php echo $cat->project_category_id; ?>" >
                                 <i class="entypo-pencil"></i>
                                 <?php echo get_phrase('edit'); ?>
                             </a>
@@ -39,7 +43,7 @@
 
                         <!-- DELETION LINK -->
                         <li>
-                            <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>index.php?admin/category_action/delete/<?php echo $cat->project_category_id; ?>', '<?php echo base_url(); ?>index.php?admin/reload_category_list');" >
+                            <a href="<?php echo base_url(); ?>index.php?admin/cat_delete/<?php echo $cat->project_category_id; ?>" >
                                 <i class="entypo-trash"></i>
                                 <?php echo get_phrase('delete'); ?>
                             </a>

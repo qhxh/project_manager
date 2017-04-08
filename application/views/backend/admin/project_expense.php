@@ -40,7 +40,7 @@
                         <tr>
                             <td><?php echo $row1['title']; ?></td>
                             <td >
-                                <?php echo $row1['amount']; ?>
+                                <?php echo money_format('%n', $row1['amount']); ?>
                             </td>
                             <td style="width: 20%"><?php echo date('d M Y', $row1['timestamp']); ?></td>
                            

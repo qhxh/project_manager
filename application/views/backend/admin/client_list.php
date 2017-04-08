@@ -128,7 +128,7 @@
 
                         <!-- EDITING LINK -->
                         <li>
-                            <a onclick="showAjaxModal('<?php echo base_url(); ?>index.php?modal/popup/client_edit/<?php echo $row['client_id']; ?>');">
+                            <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>index.php?modal/popup/client_edit/<?php echo $row['client_id']; ?>');">
                                 <i class="entypo-pencil"></i>
                                 <?php echo get_phrase('edit'); ?>
                             </a>
@@ -249,8 +249,4 @@
         });
 
     });
-
-
-
-
 </script>

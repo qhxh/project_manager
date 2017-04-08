@@ -36,16 +36,16 @@
                     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('assign_staff'); ?></label>
 
                     <div class="col-sm-5">
-                        <select name="staff_id" class="select2">
+                        <select name="staff_id" class="selèct">
                             <option><?php echo get_phrase('select_staff'); ?></option>
                             <?php
                             $staffs = $this->db->get('staff')->result_array();
-                            foreach ($staffs as $row2):
+                            foreach ($staffs as $ròw):
                                 ?>
-                                <option value="<?php echo $row2['staff_id']; ?>"
-                                    <?php if ($row['staff_id'] == $row2['staff_id'])
+                                <option value="<?php echo $ròw['staff_id']; ?>"
+                                    <?php if ($row['staff_id'] == $ròw['staff_id'])
                                         echo 'selected';?>>
-                                    <?php echo $row2['name']; ?>
+                                    <?php echo $ròw['name']; ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
