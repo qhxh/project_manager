@@ -1,3 +1,20 @@
+<script type="text/javascript">
+    //tinh toan don vi triet khau
+    function onChangeDiscount() {
+        var selected_donvi = $('select[name=donvi-chietkhau]').val();
+        if ( selected_donvi == 'money' ) {
+            $('#discount-value').val($('#input-discount').val());
+        }
+        if ( selected_donvi == 'percent' ) {
+            var project_buget = $('input[name=budget]').val();
+            console.log(project_buget);
+            var project_discount = $('#input-discount').val();
+            console.log(project_discount);
+            var convert = project_buget * project_discount / 100;
+            console.log(convert);
+            $('#discount-value').val(convert);
+        }
+    }
 </script>
 <!-- ajax change category -->
 <?php
@@ -20,7 +37,7 @@
                 cat_time = cats_array[i].cat_time;
                 break;
             }
-        }   
+        }
         //update textbox
         $('input[name="budget"]').val(cat_gia);
 
@@ -30,6 +47,7 @@
         var today = moment();
         var end_day = today.add('days',cat_time);
         document.getElementById('timestamp_end').value = end_day.format('DD/MM/YYYY');
+
     }
 
 </script>
@@ -66,7 +84,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('Category'); ?></label>
+                    <label for="field-1" class="col-sm-3 control-label"><?php echo "Gói:"; ?></label>
                
                     <div class="col-sm-5">
                         <select name="category" class="form-control selectboxit" onchange="onChangeCategory();">
@@ -96,14 +114,23 @@
                 
                  <!-- qhxh code -->
                 <div class="form-group">
-                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('discount').' (%)'; ?></label>
+                    <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('discount'); ?></label>
 
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="entypo-bookmarks"></i></span>
-                            <input type="text" class="form-control" name="discount"  value="" > 
+                   
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="input-discount" name="input-discount"  value="0" >
                         </div>
-                    </div>
+                        <div class="col-xs-2">
+                            <select class="form-control pull-left" name="donvi-chietkhau" onchange="onChangeDiscount();">
+                                <option value="money" selected> Đơn vị </option>
+                                <option value="money" > VND </option>
+                                <option value="percent"> % </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control" id="discount-value" name="discount" value="0" > 
+                        </div>
+        
                 </div>
                 <!-- end qhxh code -->
 
@@ -113,7 +140,7 @@
                     <div class="col-sm-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" id = "timestamp_start" class="form-control datepicker" name="timestamp_start"  value="<?php echo date('d/m/Y'); ?>" >
+                            <input type="text" id = "timestamp_start" data-format="dd/mm/yy" class="form-control datepicker" name="timestamp_start"  value="<?php echo date('d/m/y') ?>" >
                         </div>
                     </div>
                 </div>
@@ -124,7 +151,7 @@
                     <div class="col-sm-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" id="timestamp_end" class="form-control datepicker" name="timestamp_end"  value="" >
+                            <input type="text" id="timestamp_end" class="form-control datepicker" data-format="dd/mm/yy" name="timestamp_end"  value="" >
                         </div>
                     </div>
                 </div>
@@ -184,7 +211,7 @@
                     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('company'); ?></label>
 
                     <div class="col-sm-5">
-                        <select id="company_select" name="company_id" class="form-control">
+                        <select id="company_select" name="company_id" class="form-control selectboxit">
                             <option><?php echo get_phrase('select_company'); ?></option>
                             <?php
                             $companies = $this->db->get('company')->result_array();
@@ -260,7 +287,7 @@
                     zindex: 3,
                     headerColor: '#006470',
                     iframe: true,
-                    iframeURL: "<?php echo base_url();?>index.php?modal/popup/client_add/",
+                    iframeURL: "<?php echo base_url();?>index.php?/admin/add_client_modal/",
                     onClosed: function(){
                        
                         $("#client_id").empty();
@@ -271,10 +298,10 @@
                             var len = list_client.length;
                             for ( var i=0 ; i<len; i++ ) {
                                 //console.log(list_client[i].client_id + "->"+ list_client[i].name);
-                               
+                                
                                 var option = $('<option value="'+list_client[i].client_id+'">'+ list_client[i].name+'</option>');
                                 $('#client_id').append(option);
-                            }
+                            }   
                             $('#client_id').trigger("chosen:updated");
                         });
             
@@ -293,7 +320,7 @@
                     zindex: 3,
                     headerColor: '#006470',
                     iframe: true,
-                    iframeURL: "<?php echo base_url();?>index.php?modal/popup/company_add/",
+                    iframeURL: "<?php echo base_url();?>index.php?/admin/add_company_modal/",
                     onClosed: function(){
                         
                             $("#company_select").empty();
@@ -327,4 +354,3 @@
                
             });
         </script>
-

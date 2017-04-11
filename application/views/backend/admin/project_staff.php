@@ -75,11 +75,7 @@ foreach ($current_project as $row):
                 if ($row['client_id'] < 1):
                     ?>
                     <center>
-                        <button type="button" class="btn btn-default btn-icon icon-left" style="margin:10px;"
-                                onclick="showAjaxModal('<?php echo base_url(); ?>index.php?modal/popup/project_edit/<?php echo $row['project_code']; ?>');">
-        <?php echo get_phrase('add_client'); ?>
-                            <i class="entypo-pencil"></i>
-                        </button>
+                            <i class="entypo-pencil">Chưa có khách hàng</i>
                     </center>
     <?php endif; ?>
 
@@ -264,5 +260,9 @@ foreach ($current_project as $row):
 
     </div>
 <?php endforeach; ?>
-
+<script type="text/javascript">
+    $('#myModal').on('hidden.bs.modal', function () {
+    // do something…
+    })
+</script>
 

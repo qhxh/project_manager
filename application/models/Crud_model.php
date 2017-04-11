@@ -291,10 +291,7 @@ class Crud_model extends CI_Model {
         // qhxh code: them truong category
         $data['project_category_id'] = $this->input->post('category');
         // qhxh code: them truong triet khau   
-        if ( ! ( $this->input->post('discount')  ) )
-            $data['discount'] = $this->input->post('discount');
-        else
-            $data['discount'] = 0;
+        $data['discount'] = $this->input->post('discount');
         //end qhxh code
 
         $data['timestamp_start'] = $this->input->post('timestamp_start');

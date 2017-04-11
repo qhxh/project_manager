@@ -115,7 +115,7 @@ foreach ($current_project as $row):
                     <div class="col-sm-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" class="form-control datepicker" name="timestamp_start"  value="<?php echo $row['timestamp_start']; ?>" >
+                            <input type="text" class="form-control datepicker" data-format="dd/mm/yy" name="timestamp_start"  value="<?php echo $row['timestamp_start']; ?>" >
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ foreach ($current_project as $row):
                     <div class="col-sm-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="entypo-calendar"></i></span>
-                            <input type="text" class="form-control datepicker" name="timestamp_end"  value="<?php echo $row['timestamp_end']; ?>" >
+                            <input type="text" class="form-control datepicker" data-format="dd/mm/yy" name="timestamp_end"  value="<?php echo $row['timestamp_end']; ?>" >
                         </div>
                     </div>
                 </div>
@@ -155,8 +155,8 @@ foreach ($current_project as $row):
                 <div class="form-group">
                     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('client'); ?></label>
 
-                    <div class="col-sm-5">
-                        <select name="client_id" class="select2">
+                    <div class="col-sm-7">
+                        <select name="client_id" class="form-control selectboxit">
                             <option value=""><?php echo get_phrase('select_a_client'); ?></option>
                             <?php
                             $clients = $this->db->get('client')->result_array();
@@ -166,15 +166,15 @@ foreach ($current_project as $row):
                                         <?php if ($row['client_id'] == $row2['client_id']) echo 'selected'; ?>>
                                     <?php echo $row2['name']; ?></option>
                             <?php endforeach; ?>
-                        </select>
-                    </div>
+                    </select>
+                </div>
                     
-                    <?php echo get_phrase('update_project'); ?></button>
+                    
                 </div>
 
                 <div class="form-group">
                     <label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('company'); ?></label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-7">
                         <select name="company_id" class="form-control selectboxit">
                             <option><?php echo get_phrase('select_company'); ?></option>
                             <?php
@@ -204,12 +204,9 @@ foreach ($current_project as $row):
 
             </div>
         </div>
-
     </div>
 
     <div class="col-md-3">
-
-
         <!-- client -->
         <div class="panel panel-primary" data-collapsed="0">
             <div class="panel-heading">
@@ -223,14 +220,8 @@ foreach ($current_project as $row):
                 <?php
                 if ($row['client_id'] < 1):
                     ?>
-                    <center>
-                        <button type="button" class="btn btn-default btn-icon icon-left" style="margin:10px;"
-                                onclick="showAjaxModal('<?php echo base_url(); ?>index.php?modal/popup/project_edit/<?php echo $row['project_code']; ?>');">
-        <?php echo get_phrase('add_client'); ?>
-                            <i class="entypo-pencil"></i>
-                        </button>
-                    </center>
-    <?php endif; ?>
+                    <div class="text-warning"> Chưa có khách hàng cho dự án này </div>
+                <?php endif; ?>
 
                 <table width="100%" border="0">
                     <tbody>
@@ -310,12 +301,12 @@ foreach ($current_project as $row):
            <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-8 panel-title">
-                        <i class="entypo-users"></i> Assigned staff
+                        <i class="entypo-users"></i> Nhân viên
                     </div>
                     <div class="col-md-4 panel-options">
                 <?php if ($number_of_staffs > 0): ?>
-                            <a href="<?php echo base_url(); ?>index.php?admin/projectroom/edit/<?php echo $project_code; ?>" 
-                                    class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" data-original-title="<?php echo get_phrase('manage_staff'); ?>">
+                            <a href="<?php echo base_url(); ?>index.php?admin/projectroom/asignstaff/<?php echo $project_code; ?>" 
+                                    class="btn btn-default tooltip-primary" data-toggle="tooltip" data-placement="top" data-original-title="<?php echo 'Sủa nhân viên cho dự án'; ?>">
                                 <i class="entypo-pencil"></i>
                             </a>
                 <?php endif; ?>

@@ -12,7 +12,7 @@
     <?php if ($text_align == 'right-to-left') :?>
     	<link rel="stylesheet" href="assets/css/neon-rtl.css">
 	<?php endif;?>
-
+	
 	<!-- THEME SETTINGS-->
   <?php
     $skin_colour = $this->db->get_where('settings' , array(

@@ -42,7 +42,7 @@
                         <div class="col-sm-7">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="entypo-user"></i></span>
-                                <input type="text" class="form-control" name="cat-ngansach"  value="<?php if ($cat->cat_ngansach) echo $cat->cat_ngansach; ?>" placeholder="VND">
+                                <input type="text" class="form-control" name="cat-ngansach" data-mask="fdecimal" data-dec="." value="<?php if ($cat->cat_ngansach) echo $cat->cat_ngansach; ?>"  placeholder="VND">
                             </div>
                             <?php echo form_error('cat-ngansach'); ?>
                         </div>

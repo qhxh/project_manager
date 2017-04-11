@@ -12,7 +12,7 @@
                 <?php echo form_open(base_url() . 'index.php?admin/company/create/' , array('class' => 'form-horizontal form-groups-bordered validate ajax-submit', 'enctype' => 'multipart/form-data'));?>
 	
 					<div class="form-group">
-						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('name');?>*</label>
+						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('name');?></label>
                         
 						<div class="col-sm-7">
                       	<div class="input-group">
@@ -23,7 +23,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('address');?>*</label>
+						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('address');?></label>
                         
 						<div class="col-sm-7">
                       	<div class="input-group">
@@ -34,12 +34,12 @@
 					</div>
 
 					<div class="form-group">
-						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('phone');?>*</label>
+						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('phone');?></label>
                         
 						<div class="col-sm-7">
                       	<div class="input-group">
 								<span class="input-group-addon"><i class="entypo-phone"></i></span>
-								<input type="text" class="form-control" data-validate="required,number"  name="phone">
+								<input type="text" class="form-control" name="phone">
                          </div>
 						</div>
 					</div>
@@ -86,7 +86,7 @@
                     <div class="form-group">
 						<div class="col-sm-offset-4 col-sm-7">
 							<button type="submit" class="btn btn-info" id="submit-button"><?php echo get_phrase('add_company');?></button>
-                         <span id="preloader-form"></span>
+                  
 						</div>
 					</div>
                 <?php echo form_close();?>
@@ -94,15 +94,6 @@
         </div>
     </div>
 </div>
-
-<script>
-	// url for refresh data after ajax form submission
-	var post_refresh_url	=	'<?php echo base_url();?>index.php?admin/reload_company_list';
-	var post_message		=	'Data Created Successfully';
-</script>
-
-<!-- calling ajax form submission plugin for specific form -->
-<script src="assets/js/ajax-form-submission.js"></script>
 
 <script type="text/javascript">
 	// Select2 Dropdown replacement

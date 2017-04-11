@@ -99,7 +99,7 @@
 								echo 'btn btn-primary';
 							else 
 								echo 'btn btn-default';?> btn-block btn-icon icon-left">
-			<?php echo 'chỉ định nhân viên';?>
+			<?php echo 'Chỉ định nhân viên';?>
 			<i class="entypo-users"></i>
 		</a>
 

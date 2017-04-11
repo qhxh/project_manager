@@ -46,8 +46,8 @@
                 //title cho trang thai du an
                 if ($row['project_status'] == 0) $status_title = 'Đã lưu trữ';
                 if ($row['project_status'] == 1) $status_title = 'Đang thực hiện';
-                if ($row['project_status'] == 2) $status_title = 'Dự án mới';
-                if ($row['project_status'] == 3) $status_title = 'Đang bàn giao';
+                if ($row['project_status'] == 3) $status_title = 'Dự án mới';
+                if ($row['project_status'] == 2) $status_title = 'Đang bàn giao';
             ?>
             <h5> Thông tin dự án </h5>
             <table class="table table-hover table-bordered table-striped">
@@ -61,7 +61,7 @@
                     </tr>
                     <tr> 
                         <td> Chiết khấu </td>
-                        <td> <?php echo $row['discount'];?>%</td>
+                        <td> <?php echo money_format("%n", $row['discount']);?></td>
                     </tr>
             </table>
             <!-- end qhxh code -->

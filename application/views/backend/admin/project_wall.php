@@ -24,7 +24,7 @@ foreach ($current_project as $row):
                 <div class="form-group">
                     <!-- MESSAGE BOX -->
                     <div class="col-md-9">
-                        <textarea class="form-control autogrow" rows="3" placeholder="Type new message...." name="message" required></textarea>
+                        <textarea class="form-control autogrow" rows="3" placeholder="Type new message...." name="message" data-validate="required,minlength[4]"></textarea>
                     </div>
 
 

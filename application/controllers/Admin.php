@@ -553,6 +553,7 @@ class Admin extends CI_Controller {
         $this->load->model('qh_notification_model');
 
         if ($param1 == 'create') {
+            echo $this->input->post('discount');
             $project_code = $this->crud_model->create_project();
             // qhxh code: khoi tao project progress cua nhan vien
             if (! $this->crud_model->create_staff_progress($project_code)) die('loi!');
@@ -1289,8 +1290,8 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('cat-name', 'Tên gói', 'required',
                 array('required' => 'Tên gói không được trống')
             );
-            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|numeric',
-                array('required' => 'Ngân sách không được trống', 'numeric' => 'Ngân sách phải là tiền tệ')
+            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|decimal',
+                array('required' => 'Ngân sách không được trống', 'decimal' => 'Ngân sách phải là tiền tệ')
             );
             $this->form_validation->set_rules('cat-time', 'Thời gian là số ngày', 'required|integer',
                 array('required' => 'Thời gian không được trống', 'integer' => 'Số ngày phải là số nguyên')
@@ -1325,8 +1326,6 @@ class Admin extends CI_Controller {
             $this->load->view('backend/index', $page_data);
         }
         
-
-        
     }
     function cat_edit($cat_id) {
         $this->load->model('qh_category_model');
@@ -1337,8 +1336,8 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('cat-name', 'Tên gói', 'required',
                 array('required' => 'Tên gói không được trống')
             );
-            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|numeric',
-                array('required' => 'Ngân sách không được trống', 'numeric' => 'Ngân sách phải là tiền tệ')
+            $this->form_validation->set_rules('cat-ngansach', 'Ngân sách', 'required|decimal',
+                array('required' => 'Ngân sách không được trống', 'decimal' => 'Ngân sách phải là tiền tệ')
             );
             $this->form_validation->set_rules('cat-time', 'Thời gian là số ngày', 'required|integer',
                 array('required' => 'Thời gian không được trống', 'integer' => 'Số ngày phải là số nguyên')
@@ -1444,19 +1443,32 @@ function notify_reload_list()
     $this->load->view('backend/admin/notification');
 }
 /************qhxh code : load company, client ajax ******************/
-public function ajax_get_client() {
+function ajax_get_client() {
     $clients = $this->db->get('client')->result_array();
     echo json_encode($clients);
     die();
 }
 
-public function ajax_get_company() {
+function ajax_get_company() {
     $companies = $this->db->get('company')->result_array();
     echo json_encode($companies);
     die();
 }
 
+//////////////////////////////////////// modal client and company///////////////////////
+function add_company_modal() {
+    $page_data['page_name'] = 'company_add_qh_modal';
+    $page_data['page_title'] = '';
+    $this->load->view('backend/index', $page_data);
+}
+/**********************/
+function add_client_modal() {
+    $page_data['page_name'] = 'client_add_qh_modal';
+    $page_data['page_title'] = '';
+    $this->load->view('backend/index', $page_data);
+}
 
 
     /********************** END CLASS ***************************/
+
 }    

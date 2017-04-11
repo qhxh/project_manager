@@ -12,7 +12,7 @@
                 <?php echo form_open(base_url() . 'index.php?admin/staff/create/' , array('class' => 'form-horizontal form-groups-bordered validate ajax-submit', 'enctype' => 'multipart/form-data'));?>
 	
 					<div class="form-group">
-						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('name');?></label>
+						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('name');?>*</label>
                         
 						<div class="col-sm-7">
                       	<div class="input-group">
@@ -40,22 +40,22 @@
 					</div>
                     
 					<div class="form-group">
-						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('email');?></label>
+						<label for="field-1" class="col-sm-4 control-label"><?php echo get_phrase('email');?>*</label>
 						<div class="col-sm-7">
                       	<div class="input-group ">
 								<span class="input-group-addon"><i class="entypo-mail"></i></span>
-								<input type="text" class="form-control" name="email" value="">
+								<input type="text" class="form-control" name="email" data-validate="required,email"  value="">
                          </div>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="field-2" class="col-sm-4 control-label"><?php echo get_phrase('password');?></label>
+						<label for="field-2" class="col-sm-4 control-label"><?php echo get_phrase('password');?>*</label>
                         
 						<div class="col-sm-7">
                       	<div class="input-group ">
 								<span class="input-group-addon"><i class="entypo-key"></i></span>
-								<input type="text" class="form-control" name="password" value="" >
+								<input type="text" class="form-control" name="password" data-validate="required,minlength[6],maxlength[20]" value="" >
                          </div>
 						</div> 
 					</div>

@@ -15,7 +15,7 @@
                         <div class="col-sm-7">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="entypo-comment"></i></span>
-                                <input type="text" class="form-control" name="cat-name"  value="" placeholder="Tên gói">
+                                <input type="text" class="form-control" name="cat-name" data-validate="required"  value="" placeholder="Tên gói">
 
                             </div>
                             <?php echo form_error('cat-name'); ?>
@@ -40,7 +40,7 @@
                         <div class="col-sm-7">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="entypo-cc-nc"></i></span>
-                                <input type="text" class="form-control" name="cat-ngansach"  value="" placeholder="VND">
+                                <input type="text" class="form-control" name="cat-ngansach" data-validate="required"  value="" placeholder="VND">
                             </div>
                             <?php echo form_error('cat-ngansach'); ?>
                         </div>
@@ -52,7 +52,7 @@
                         <div class="col-sm-7">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="entypo-clock"></i></span>
-                                <input type="text" class="form-control" name="cat-time"  value="" placeholder="Ngày">
+                                <input type="text" class="form-control" name="cat-time" data-validate="required,number" value="" placeholder="Ngày">
                             </div>
                             <?php echo form_error('cat-time'); ?>
                         </div>

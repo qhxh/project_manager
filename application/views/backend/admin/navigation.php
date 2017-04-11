@@ -144,7 +144,9 @@
                                 $page_name == 'project' ||
                                     $page_name == 'project_room' ||
                                         $page_name == 'project_quote' || $page_name == 'project_quote_view'
-                                        || $page_name == 'category_list')
+                                        || $page_name == 'category_list'
+                                            || $page_name == 'category_edit'
+                                                || $page_name == 'category_form' )
                                             echo 'opened active has-sub';?>">
             <a href="#">
                 <i class="entypo-paper-plane"></i>
