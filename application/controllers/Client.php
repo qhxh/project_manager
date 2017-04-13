@@ -153,14 +153,40 @@ class Client extends CI_Controller {
             $this->session->set_userdata('last_page', current_url());
             redirect(base_url(), 'refresh');
         }*/
+        //load model thong bao
+        $this->load->model('qh_notification_model');
+        $project_code = $param2; //lay project code
+        //lay thong tin project dang lam
+        $current_project = $this->crud_model->get_one_project($project_code);
+        $list_staffs = $this->crud_model->get_staff_in_project($project_code);
 
         if ($param1 == 'create') 
         {
             $this->crud_model->create_project_bug($param2);  // param2 = project_code
+
+             //tao notification 
+            //gui thong bao cho nhan vien (quyen staff)
+            foreach ($list_staffs as $staff) 
+            {
+                $notify_title   = '<span class="text-danger"> Khách hàng thông báo lỗi </span> ';
+                $notify_content = 'Phản hồi lỗi từ khách hàng trong dự án '; 
+                $notify_content .= '<a class="text-danger" href="'. base_url() .'index.php?staff/projectroom/bug/'. $project_code .'" >'. $current_project->title .'</a>'; 
+                $this->qh_notification_model->create_notify($staff,'staff',$notify_title,$notify_content,0);
+            }
         } 
         else if ($param1 == 'edit') 
         {
             $this->crud_model->update_project_bug($param2); // param2 = project_bug_id
+
+             //tao notification 
+            //gui thong bao cho nhan vien (quyen staff)
+            foreach ($list_staffs as $staff) 
+            {
+                $notify_title   = '<span class="text-danger"> Khách hàng phản hồi lỗi </span> ';
+                $notify_content = 'Phản hồi lỗi từ khách hàng trong dự án '; 
+                $notify_content .= '<a class="text-danger" href="'. base_url() .'index.php?staff/projectroom/bug/'. $project_code .'" >'. $current_project->title .'</a>'; 
+                $this->qh_notification_model->create_notify($staff,'staff',$notify_title,$notify_content,0);
+            }
         } 
         else if ($param1 == 'delete') 
         {
