@@ -338,6 +338,9 @@ class Crud_model extends CI_Model {
 
         $this->db->where('project_code', $project_code);
         $this->db->update('project', $data);
+
+        //thong bao bang email
+        $this->email_model->notify_email('email_update_project', $project_code);
     }
 
     /*************************** QHXH code update project staff **********/

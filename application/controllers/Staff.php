@@ -179,6 +179,9 @@ class Staff extends CI_Controller {
                 $this->qh_notification_model->create_notify($admin['admin_id'],'admin',$notify_title,$notify_content,0);
             }
 
+            //gui email den khach hang
+            $this->email_model->notify_email('email_update_project', $project_code);
+
             $this->session->set_flashdata('flash_message' , 'Cập nhật thành công');
             redirect(base_url() . 'index.php?staff/projectroom/project_staff_progress/' . $progress_code , 'refresh');
     }

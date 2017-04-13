@@ -28,6 +28,22 @@ class Email_model extends CI_Model {
             $this->do_email($email_msg , $email_sub , $email_to);
     	}
 
+        // email notification for update project 
+        if ($task == 'email_update_project')
+        {
+            $client_id      =   $this->db->get_where('project' , array('project_code' => $param2))->row()->client_id;
+            $CLIENT_NAME    =   $this->db->get_where('client' , array('client_id' => $client_id))->row()->name;
+            $PROJECT_NAME   =   $this->db->get_where('project' , array('project_code' => $param2))->row()->title;
+            $PROJECT_LINK   =   base_url().'index.php?client/projectroom/wall/'.$param2;
+
+            $email_msg      =   str_replace('[CLIENT_NAME]' , $CLIENT_NAME , $email_msg);
+            $email_msg      =   str_replace('[PROJECT_NAME]' , $PROJECT_NAME , $email_msg);
+            $email_msg      =   str_replace('[PROJECT_LINK]' , $PROJECT_LINK , $email_msg);
+
+            $email_to       =   $this->db->get_where('client' , array('client_id' => $client_id))->row()->email;
+            $this->do_email($email_msg , $email_sub , $email_to);
+        }
+
         // email notification for client account opening by admin
         if ($task == 'new_client_account_opening')
         {
@@ -224,11 +240,13 @@ class Email_model extends CI_Model {
 		
 		$config = array();
         $config['useragent']		= "CodeIgniter";
-        $config['mailpath']		= "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
-        $config['protocol']		= "smtp";
-        $config['smtp_host']		= "localhost";
-        $config['smtp_port']		= "25";
+        //$config['mailpath']		= "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
+        $config['protocol']		    = "smtp";
+        $config['smtp_host']		= "ssl://smtp.googlemail.com";
+        $config['smtp_port']		= 465;
         $config['mailtype']		= 'html';
+        $config['smtp_user']    = 'doivodoi.n1@gmail.com'; // change it to yours
+        $config['smtp_pass']    = 'dinhhuong'; // change it to yours
         $config['charset']		= 'utf-8';
         $config['newline']		= "\r\n";
         $config['wordwrap']		= TRUE;
@@ -254,7 +272,7 @@ class Email_model extends CI_Model {
 		
 		$this->email->send();
 		
-		//echo $this->email->print_debugger();
+		//$this->email->print_debugger();
 	}
 }
 
