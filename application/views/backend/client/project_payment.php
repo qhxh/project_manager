@@ -72,7 +72,7 @@
         foreach ($milestones as $row2) {
             $total_amount += $row2['amount'];
         }
-        $paid_milestones = $this->db->get_where('project_milestone' , array('status' => 1))->result_array();
+        $paid_milestones = $this->db->get_where('project_milestone' , array('status' => 1, 'project_code' => $project_code))->result_array();
         foreach ($paid_milestones as $row2) {
             $paid_amount += $row2['amount'];
         }
@@ -81,7 +81,7 @@
         <strong style="color: #818da1;">
             <?php echo get_phrase('total_amount');?> : <?php echo money_format('%n', $total_amount) ;?> &nbsp; &nbsp; &nbsp;
             <?php echo get_phrase('paid_amount');?> : <?php echo money_format('%n', $paid_amount) ;?> &nbsp; &nbsp; &nbsp;
-            <?php echo get_phrase('due');?> : <?php if ($total_amount < $paid_amount) echo '0d'; else echo money_format('%n', $total_amount - $paid_amount);?> 
+            <?php echo 'Còn lại';?> : <?php if ($total_amount < $paid_amount) echo '0d'; else echo money_format('%n', $total_amount - $paid_amount);?> 
         </strong>
     </div>
     

@@ -44,7 +44,7 @@
 
                     <div class="col-sm-5">
                         <div class="date">
-                            <input type="text" name="timestamp" class="form-control datepicker" data-format="dd/mm/yy" placeholder="Ngày hết hạn">
+                            <input type="text" name="timestamp" class="form-control datepicker" placeholder="Ngày hết hạn">
                         </div>
                     </div>
                 </div>
